@@ -1,12 +1,20 @@
 # Generic Webhook Plugin Changelog
 Changelog of Generic Webhook Plugin.
 ## Unreleased
-### GitHub [#65](https://github.com/jenkinsci/generic-webhook-trigger-plugin/issues/65) [Question] Multibranch pipeline trigger specific branch/pr job possibility  
+### GitHub [#65](https://github.com/jenkinsci/generic-webhook-trigger-plugin/issues/65) Multibranch pipeline trigger specific branch/pr job possibility    *question*  
 
 **Updating doc #65**
 
 
-[c29909e607270bf](https://github.com/jenkinsci/generic-webhook-trigger-plugin/commit/c29909e607270bf) Tomas Bjerre *2018-08-07 11:05:35*
+[d1f05cfd5300b57](https://github.com/jenkinsci/generic-webhook-trigger-plugin/commit/d1f05cfd5300b57) Tomas Bjerre *2018-08-07 12:16:10*
+
+
+### No issue
+
+**Refactoring**
+
+
+[e29c7610a49da21](https://github.com/jenkinsci/generic-webhook-trigger-plugin/commit/e29c7610a49da21) Tomas Bjerre *2018-08-08 06:48:35*
 
 
 ## 1.40 (2018-07-10 12:21:16)

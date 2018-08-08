@@ -30,18 +30,10 @@ public final class JobFinder {
 
     final List<FoundJob> found = new ArrayList<>();
 
-    List<ParameterizedJob> candidateProjects = getAllParameterizedJobs(givenToken);
+    final List<ParameterizedJob> candidateProjects =
+        jobFinderImpersonater.getAllParameterizedJobsByImpersonation();
     for (final ParameterizedJob candidateJob : candidateProjects) {
-      final GenericTrigger genericTriggerOpt = findGenericTrigger(candidateJob.getTriggers());
-      if (genericTriggerOpt != null) {
-        found.add(new FoundJob(candidateJob.getFullName(), genericTriggerOpt));
-      }
-    }
-
-    candidateProjects = jobFinderImpersonater.getAllParameterizedJobsByImpersonation();
-    for (final ParameterizedJob candidateJob : candidateProjects) {
-      if (!isIncluded(candidateJob.getFullName(), found)
-          && authenticationTokenMatches(candidateJob, givenToken)) {
+      if (authenticationTokenMatches(candidateJob, givenToken)) {
         final GenericTrigger genericTriggerOpt = findGenericTrigger(candidateJob.getTriggers());
         if (genericTriggerOpt != null) {
           found.add(new FoundJob(candidateJob.getFullName(), genericTriggerOpt));
@@ -50,28 +42,6 @@ public final class JobFinder {
     }
 
     return found;
-  }
-
-  private static boolean isIncluded(final String searchFor, final List<FoundJob> includedJobs) {
-    for (final FoundJob includedJob : includedJobs) {
-      if (includedJob.getFullName().equals(searchFor)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private static List<ParameterizedJob> getAllParameterizedJobs(final String givenToken) {
-    final List<ParameterizedJob> candidateProjects =
-        jobFinderImpersonater.getAllParameterizedJobs();
-
-    final List<ParameterizedJob> candidateProjectsWithoutToken = new ArrayList<>();
-    for (final ParameterizedJob candidate : candidateProjects) {
-      if (authenticationTokenMatches(candidate, givenToken)) {
-        candidateProjectsWithoutToken.add(candidate);
-      }
-    }
-    return candidateProjectsWithoutToken;
   }
 
   @SuppressWarnings("deprecation")
